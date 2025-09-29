@@ -6,9 +6,9 @@
     "architecture": {
         "64bit": {
             "url": "https://github.com/sainnhe/caj2pdf-qt/releases/download/v0.1.6/caj2pdf-qt-windows-x86_64-v0.1.6.zip",
-            "hash": "39CCF21FBE32E5280F4B6C92B6CA0C49E8E88E9C30838B876C57B106BB694C01",
+            "hash": "39CCF21FBE32E5280F4B6C92B6CA0C49E8E88E9C30838B876C57B106BB694C01"
         }
-    }
+    },
     "shortcuts": [
         [
             "caj2pdf.exe",
