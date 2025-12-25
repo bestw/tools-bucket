@@ -1,0 +1,37 @@
+{
+  "homepage": "https://www.wch.cn/downloads/BLEDebug_ZIP.html",
+  "description": "BLE 低功耗蓝牙调试工具，支持设备扫描、连接、特征调试等。",
+  "version": "1.2",
+  "license": "Freeware",
+  "url": "https://file.wch.cn/download/file?id=528#/dl.zip",
+  "hash": "31a285e95f78b145395fd3b25d94919f106e63ce46e3d506469e84fafbeb1c51",
+  "extract_to": ".\\tmp",
+  "installer": {
+    "script": [
+      "7z x \"$dir\\tmp\\BLEDebug.exe\" -o\"$dir\" -y -bsp0 -bso0 -bse0",
+      "",
+      "if (!(Test-Path \"$dir\\bin\\cfg.json\" -PathType Leaf)) {",
+      "    Set-Content -Path \"$dir\\bin\\cfg.json\" -Value \"{}\" -Encoding UTF8",
+      "}",
+      "",
+      "Remove-Item \"$dir\\tmp\" -Recurse -Force"
+    ]
+  },
+  "shortcuts": [
+    [
+      "BLEDebug.EXE",
+      "BLEDebug"
+    ]
+  ],
+  "persist": [
+    "bin\\cfg.json",
+    "bin\\temp"
+  ],
+  "checkver": {
+    "url": "https://api1.wch.cn/api/official/website/common/relationFiles?fileName=BLEDebug_ZIP.html",
+    "regex": "\"version\"\\s*:\\s*\"([\\d.]+)\""
+  },
+  "autoupdate": {
+    "url": "https://file.wch.cn/download/file?id=528#/dl.zip"
+  }
+}
