@@ -1,27 +1,41 @@
 {
-  "homepage": "https://pixpin.cn/",
-  "description": "屏幕截图，录制屏幕，长截图，文字识别，贴图，以及更多功能",
-  "version": "2.0.0.3",
-  "license": "Freeware",
-  "url": "https://download.pixpin.cn/PixPin_2.0.0.3.zip",
-  "hash": "b50edd16fc4ced4599d5bb7e80448d325e8f7adc348ae9bcd790a85ad43f241f",
-  "extract_dir": "PixPin",
-  "shortcuts": [
-    [
-      "PixPin.exe",
-      "PixPin"
-    ]
-  ],
-  "persist": [
-    "Config",
-    "Data",
-    "History"
-  ],
-  "checkver": {
-    "url": "https://pixpin.cn/docs/",
-    "regex": "/change-log/([\\d.]+).md"
-  },
-  "autoupdate": {
-    "url": "https://download.pixpin.cn/PixPin_$version.exe"
-  }
+    "homepage": "https://pixpin.cn/",
+    "description": "PixPin - Screenshot, annotation, long capture, OCR, and sticky image tool.",
+    "version": "2.2.4.1",
+    "license": "Freeware (proprietary)",
+    "url": "https://download.pixpin.cn/PixPin_cn_zh-cn_2.2.4.1.zip",
+    "hash": "cc5b983d135751ad591cdeba6ee5bea13171007fcacf4083dabb23bc17baaad8",
+    "extract_dir": "PixPin",
+    "shortcuts": [
+        [
+            "PixPin.exe",
+            "PixPin"
+        ]
+    ],
+    "persist": [
+        "Config",
+        "Data",
+        "History"
+    ],
+    "checkver": {
+        "script": [
+            "$page = Invoke-WebRequest -UseBasicParsing -Uri 'https://pixpin.cn/download/'",
+            "$link = $page.Links | Where-Object { $_.outerHTML -match '点此下载便携版|portable' -or $_.id -eq 'portable-download-link' } | Select-Object -First 1 -ExpandProperty href",
+            "if (-not $link) { return 'unknown' }",
+            "if ($link -notmatch '^https?://') { $link = 'https://pixpin.cn' + $link }",
+            "if ($link -match '([\\d\\.]+)\\.zip$') {",
+            "    $ver = $matches[1]",
+            "    \"$ver|$link\"",
+            "} else {",
+            "    'unknown'",
+            "}"
+        ],
+        "regex": "^(?<version>[\\d\\.]+)\\|(?<url>.+)$"
+    },
+    "autoupdate": {
+        "url": "$matchUrl",
+        "hash": {
+            "mode": "download"
+        }
+    }
 }
